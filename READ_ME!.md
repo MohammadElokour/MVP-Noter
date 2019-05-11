@@ -26,7 +26,7 @@ the fact that these notes are cloud based they wont get lost if something bad ha
 ## How to Get Started ##
   > Describe how easy it is to get started:
 its not easy but im going to work my way up starting from the back-end then data-base connecting all of that to my front-end,
-making sure everything work befor adding any additional functionality or style.
+making sure everything works befor adding any additional functionality or style.
 
 ## Customer Quote ##
   > "this is somthing I never though I needed but its there anyway so why not!?"
