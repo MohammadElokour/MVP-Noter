@@ -1,36 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import List from './components/List.jsx';
+import SignIn from './components/SignIn.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      items: []
+      notes: []
     }
   }
 
-  componentDidMount() {
-    $.ajax({
-      url: '/items', 
-      success: (data) => {
-        this.setState({
-          items: data
-        })
-      },
-      error: (err) => {
-        console.log('err', err);
-      }
-    });
-  }
+  start(user) {
+    console.log(`${user} Signed In!`);
+    // TODO HERE AJAX POST REQUEST
+    };
 
   render () {
     return (<div>
-      <h1>Item List</h1>
-      <List items={this.state.items}/>
+      <h1 id='One'>Welcome To Noter!</h1>
+      <SignIn onStart={this.start.bind(this)}/>
     </div>)
   }
 }
+
+
 
 ReactDOM.render(<App />, document.getElementById('app'));

@@ -1,24 +1,25 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var items = require('../database-mysql');
+const express = require('express');
+// const items = require('../database-mysql');
+const {bodyParser, printTime} = require('./middleware');
 
 
-var app = express();
 
+const app = express();
+const port = 3000;
 app.use(express.static(__dirname + '/../react-client/dist'));
 
+let database = {notes: [{username : 'note'}]};
 
-app.get('/items', function (req, res) {
-  items.selectAll(function(err, data) {
-    if(err) {
-      res.sendStatus(500);
-    } else {
-      res.json(data);
-    }
-  });
-});
+app.get('/', (req, res) => res.send('index.html'))
+app.get('/notes', (req, res) => res.send(database.notes))
 
-app.listen(3000, function() {
-  console.log('listening on port 3000!');
-});
+app.post('/notes', (req, res) => {
+    console.dir(req.body);
+    res.send('ok');
+    const note = req.body
+    database.notes.push(note)
+  })
+  
 
+
+app.listen(port, () => console.log(`listening on port ${port}!`))
