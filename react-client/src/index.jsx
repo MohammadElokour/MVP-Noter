@@ -9,24 +9,25 @@ class App extends React.Component {
     super(props);
     this.state = { 
       notes: [],
-      user: '',
-      note: ''
+      user:''
     }
   }
 
   start(user) {
     console.log(`${user} Signed In!`);
-    // TODO HERE AJAX POST REQUEST
-    $.ajax({
-      type: "POST",
-      url: '/notes',
-      data: {username : user},
-      success: () => ('Post Successful!') ,
-    });
+    this.setState({user:user})
   };
 
   takeNote(note) {
     console.log (`${note} is saved`)
+    $.ajax({
+      type: "POST",
+      url: '/notes',
+      data: {myNote : note,
+      username:this.state.user},
+      success: () => ('Post Successful!')
+    });
+
   }  
 
   render () {

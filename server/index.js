@@ -1,23 +1,29 @@
 const express = require('express');
-const {bodyParser} = require('./middleware');
-
+const bodyParser = require('body-parser')
 
 
 const app = express();
 const port = 3000;
 app.use(express.static(__dirname + '/../react-client/dist'));
+app.use(bodyParser());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 
-let database = [{username : 'note'}];
-
+let database = [];
 app.get('/', (req, res) => res.send('index.html'))
+
+
 // app.get('/notes', (req, res) => res.send(database.notes))
 
 app.post('/notes', (req, res) => {
-    console.dir(req.body);
-    res.send('ok');
-    const note = req.body
-    database.notes.push(note)
+  let username = req.body.username
+  let myNote = req.body.myNote
+  // console.log(username + ': ' + myNote)
+  let noter = {
+    user : username,
+    notes : [myNote]
+  }
+  console.log(database)
   })
   
 

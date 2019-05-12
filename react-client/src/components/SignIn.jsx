@@ -25,7 +25,7 @@ class SignIn extends React.Component {
     return (
       <div>
         <form className='userInput'>
-          <input id='userTextInput' value={this.state.users} onChange={this.onChange} placeholder="input username" /><br />
+          <input id='userTextInput' value={this.state.user} onChange={this.onChange} placeholder="input username" /><br />
           <button onClick={this.start}>Sign In!</button>
         </form>
       </div>

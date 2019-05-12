@@ -24,7 +24,7 @@ class Notes extends React.Component {
 	render() {
 		return (
 			<div>
-				<input id="noteInput" value={this.state.notes} onChange={this.onChange} placeholder="add a note here"/><br />
+				<input id="noteInput" value={this.state.note} onChange={this.onChange} placeholder="add a note here"/><br />
         <button onClick={this.takeNote}>Take Note</button>
 			</div>
 		);
