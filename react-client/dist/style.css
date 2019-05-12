@@ -1,10 +1,29 @@
 body {
-  background-image: url(http://www.4usky.com/data/out/66/164588640-notebook-wallpapers.jpg)
+  background-image: url(./notebook-pic.jpg);
+  /* background-image: url(http://www.4usky.com/data/out/66/164588640-notebook-wallpapers.jpg) */
 }
 
 #One {
   text-align: center;
   font-family: 'Comic Sans MS';
+}
+
+#btn {
+  text-align: center;
+}
+
+#notes {
+  text-align: center;
+}
+
+#userTextInput {
+  text-align: center;
+}
+
+#noteInput {
+  text-align: center;
+  height: 55px;
+  width: 200px
 }
 
 .userInput {
