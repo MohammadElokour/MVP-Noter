@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser')
-
+const db = require('../database-mongo/index.js')
 
 const app = express();
 const port = 3000;
@@ -9,21 +9,27 @@ app.use(bodyParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-let database = [];
+
 app.get('/', (req, res) => res.send('index.html'))
 
 
-// app.get('/notes', (req, res) => res.send(database.notes))
+app.get('/notes', function (req, res) {
+  db.Note.find({}).exec(function(err, data){
+    console.log(data)
+    res.send(data);
+  })
+});
 
 app.post('/notes', (req, res) => {
+
   let username = req.body.username
-  let myNote = req.body.myNote
-  // console.log(username + ': ' + myNote)
-  let noter = {
-    user : username,
-    notes : [myNote]
+  let userNote = req.body.myNote
+  let noteData = {
+    username : username,
+    note : userNote  
   }
-  console.log(database)
+   
+  db.save(noteData)
   })
   
 

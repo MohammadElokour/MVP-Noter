@@ -3,14 +3,28 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import SignIn from './components/SignIn.jsx';
 import Notes from './components/Notes.jsx';
+import NoteList from './components/NoteList.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
       notes: [],
-      user:''
     }
+    $.ajax({
+      type: "GET",
+      url: '/notes',
+      success: this.getData.bind(this),
+      error: (error) => {
+        console.log(error);
+      }
+    });
+
+  }
+  getData (data) {
+    console.log(data)
+    this.setState({
+      notes: data});
   }
 
   start(user) {
@@ -23,8 +37,8 @@ class App extends React.Component {
     $.ajax({
       type: "POST",
       url: '/notes',
-      data: {myNote : note,
-      username:this.state.user},
+      data: {myNote: note,
+      username: this.state.user},
       success: () => ('Post Successful!')
     });
 
@@ -39,6 +53,9 @@ class App extends React.Component {
       <div id='notes' >
         <Notes takingNote={this.takeNote.bind(this)} />
       </div>
+      {/* <div>
+        <NoteList notes={this.state.notes}/>
+      </div> */} 
     </div>)
   }
 }

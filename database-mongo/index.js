@@ -1,31 +1,25 @@
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+let mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/NoteDB',{ useNewUrlParser: true });
 
-var db = mongoose.connection;
+let db = mongoose.connection;
 
-db.on('error', function() {
-  console.log('mongoose connection error');
+db.once("open", () => console.log("connected to the database"));
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
+
+let noteSchema = mongoose.Schema({
+  username: String,
+  note: String
 });
 
-db.once('open', function() {
-  console.log('mongoose connected successfully');
-});
+let Note = mongoose.model('Note', noteSchema);
 
-var itemSchema = mongoose.Schema({
-  quantity: Number,
-  description: String
-});
+let save = (
+  data => {
+  var datas = new Note(data);
+  datas.save();
+  }
+)
 
-var Item = mongoose.model('Item', itemSchema);
-
-var selectAll = function(callback) {
-  Item.find({}, function(err, items) {
-    if(err) {
-      callback(err, null);
-    } else {
-      callback(null, items);
-    }
-  });
-};
-
-module.exports.selectAll = selectAll;
+module.exports.save = save;
+module.exports.Note = Note;
